@@ -3,7 +3,7 @@
   ansible.builtin.pip:
     name: 'xmltodict'
     executable: 'pip3'
-    delegate_to: 'localhost'
+  delegate_to: 'localhost'
 
 - name: 'test namesilo api'
   namesilo_dns:
@@ -15,6 +15,6 @@
     ttl: '{{ item.ttl | default(omit) }}'
     distance: '{{ item.distance | default(omit) }}'
     state: '{{ item.state | default(omit) }}'
-    delegate_to: 'localhost'
+  delegate_to: 'localhost'
   loop: '{{ role_namesilo_data }}'
 ...
