@@ -1,0 +1,20 @@
+---
+- name: 'install xmltodict'
+  ansible.builtin.pip:
+    name: 'xmltodict'
+    executable: 'pip3'
+    delegate_to: 'localhost'
+
+- name: 'test namesilo api'
+  namesilo_dns:
+    apikey: '{{ role_namesilo_apikey }}'
+    domain: '{{ item.domain }}'
+    type: '{{ item.type }}'
+    host: '{{ item.host }}'
+    value: '{{ item.value }}'
+    ttl: '{{ item.ttl | default(omit) }}'
+    distance: '{{ item.distance | default(omit) }}'
+    state: '{{ item.state | default(omit) }}'
+    delegate_to: 'localhost'
+  loop: '{{ role_namesilo_data }}'
+...
