@@ -17,4 +17,5 @@
     state: '{{ item.state | default(omit) }}'
   delegate_to: 'localhost'
   loop: '{{ role_namesilo_data }}'
+  failure: 'ignore'
 ...
