@@ -3,6 +3,7 @@
   ansible.builtin.pip:
     name: 'xmltodict'
     executable: 'pip3'
+    extra_args: "--break-system-packages"  # needs to be fixed later
   delegate_to: 'localhost'
 
 - name: 'test namesilo api'
