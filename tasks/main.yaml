@@ -7,6 +7,7 @@
     virtualenv_command: "python3 -m venv"
     virtualenv_site_packages: true
   delegate_to: 'localhost'
+  become: true
 
 - name: 'test namesilo api'
   namesilo_dns:
