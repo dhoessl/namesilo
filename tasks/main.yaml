@@ -1,9 +1,9 @@
 ---
 - name: 'install xmltodict'
   ansible.builtin.pip:
-    name: 'xmltodict'
-    executable: 'pip3'
-    extra_args: "--break-system-packages"  # needs to be fixed later
+    name:
+      - 'xmltodict'
+    virtualenv: '/etc/namesilo_api'
   delegate_to: 'localhost'
 
 - name: 'test namesilo api'
