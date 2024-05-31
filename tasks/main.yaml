@@ -4,6 +4,8 @@
     name:
       - 'xmltodict'
     virtualenv: '/etc/namesilo_api'
+    virtualenv_python: "python3"
+    virtualenv_site_packages: true
   delegate_to: 'localhost'
 
 - name: 'test namesilo api'
