@@ -4,6 +4,7 @@
     name: "python3-xmltodict"
     state: "latest"
   delegate_to: "localhost"
+  become: true
 
 - name: 'test namesilo api'
   namesilo_dns:
