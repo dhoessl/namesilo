@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 from ansible.module_utils.namesiloapiconnector import NamesiloApiWrapper as naw
 from ansible.module_utils.namesiloapifunctions import CheckDomain
