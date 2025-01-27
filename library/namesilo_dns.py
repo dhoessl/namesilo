@@ -57,8 +57,6 @@ class namesilo:
         }
         if self.module.params['host'] == '':
             result['host'] = self.module.params['domain']
-        else:
-            result['host'] = self.module.params['host'] + '.' + self.module.params['domain']
         if self.module.params['type'] == 'MX':
             result['distance'] = self.module.params['distance']
 
@@ -135,6 +133,8 @@ class namesilo:
                 **result
             )
         # Output the resource_record list
+        if isinstance(api_result["reply"]["resource_record"], dict):
+            return [api_result["reply"]["resource_record"]]
         return api_result["reply"]["resource_record"]
 
     def AddRecord(self):
