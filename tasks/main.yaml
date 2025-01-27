@@ -1,12 +1,5 @@
 ---
-- name: "install and update xmltodict"
-  ansible.builtin.apt:
-    name: "python3-xmltodict"
-    state: "latest"
-  delegate_to: "localhost"
-  become: true
-
-- name: 'test namesilo api'
+- name: "NameSilo API'
   namesilo_dns:
     apikey: '{{ role_namesilo_apikey }}'
     domain: '{{ item.domain }}'
