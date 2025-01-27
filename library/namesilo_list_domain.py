@@ -6,8 +6,15 @@ from ansible.module_utils.basic import AnsibleModule
 
 def CheckforDomain():
     fields = {
-            "apikey": dict(type="str", required=True),
-            "domain": dict(type="str", required=True)
+        "apikey": {
+            'type': "str",
+            'required': True,
+            'no_log': True
+        },
+        "domain": {
+            'type': "str",
+            'required': True
+        },
     }
     module = AnsibleModule(argument_spec=fields)
 

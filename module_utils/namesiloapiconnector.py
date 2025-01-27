@@ -1,73 +1,60 @@
 #!/usr/bin/python3
 
-import requests
-import xmltodict
-
+from requests import get
 
 class NamesiloApiWrapper:
-    def __init__(self, key):
+    def __init__(self, key) -> None:
         self.key = key
         self.api_uri = 'https://www.namesilo.com/api/'
-        self.api_options = '?version=1&type=xml&key=' + self.key
+        self.api_options = '?version=1&type=json&key=' + self.key
 
-    def listRecords(self, domain):
-        recordlist = requests.get(self.api_uri
-                                  + 'dnsListRecords' + self.api_options
-                                  + '&domain=' + domain
-                                  ).text
-        return xmltodict.parse(recordlist)
+    def listRecords(self, domain) -> dict:
+        response = get(
+            self.api_uri
+            + 'dnsListRecords' + self.api_options
+            + '&domain=' + domain
+        )
+        return response.json()
 
-    def addRecord(self,
-                  domain,
-                  rrtype,
-                  rrhost,
-                  rrvalue,
-                  rrdistance='10',
-                  rrttl='3600'):
-        function_options = '&domain=' + domain \
-                + '&rrtype=' + rrtype \
-                + '&rrhost=' + rrhost \
-                + '&rrvalue=' + rrvalue \
+    def addRecord(self, domain, rrtype, rrhost, rrvalue,
+                  rrdistance='10', rrttl='3600') -> dict:
+        record_options = '&domain=' + domain + '&rrtype=' + rrtype \
+                + '&rrhost=' + rrhost + '&rrvalue=' + rrvalue \
                 + '&rrttl=' + rrttl
         if rrtype == 'MX':
-            function_options += '&rrdistance=' + rrdistance
-        output = requests.get(self.api_uri
-                              + 'dnsAddRecord'
-                              + self.api_options
-                              + function_options
-                              ).text
-        return xmltodict.parse(output)
+            record_options += '&rrdistance=' + rrdistance
+        response = get(
+            self.api_uri
+            + 'dnsAddRecord'
+            + self.api_options
+            + function_options
+        )
+        return response.json()
 
-    def updateRecord(self,
-                     domain,
-                     rrid,
-                     rrhost,
-                     rrvalue,
-                     rrdistance='10',
-                     rrttl='3600'):
-        function_options = '&domain=' + domain \
-                + '&rrid=' + rrid \
-                + '&rrhost=' + rrhost \
-                + '&rrvalue=' + rrvalue \
+    def updateRecord(self, domain, rrid, rrhost, rrvalue,
+                     rrdistance='10', rrttl='3600') -> dict:
+        function_options = '&domain=' + domain + '&rrid=' + rrid \
+                + '&rrhost=' + rrhost + '&rrvalue=' + rrvalue \
                 + '&rrttl=' + rrttl
         if rrdistance != '10':
             function_options += '&rrdistance=' + rrdistance
-        output = requests.get(self.api_uri
-                              + 'dnsUpdateRecord'
-                              + self.api_options
-                              + function_options
-                              ).text
-        return xmltodict.parse(output)
+        response = get(
+            self.api_uri
+            + 'dnsUpdateRecord'
+            + self.api_options
+            + function_options
+        )
+        return response.json()
 
-    def deleteRecord(self, domain, rrid):
-        function_options = '&domain=' + domain \
-                + '&rrid=' + rrid
-        output = requests.get(self.api_uri
-                              + 'dnsDeleteRecord'
-                              + self.api_options
-                              + function_options
-                              ).text
-        return xmltodict.parse(output)
+    def deleteRecord(self, domain, rrid) -> dict:
+        function_options = '&domain=' + domain + '&rrid=' + rrid
+        response = requests.get(
+            self.api_uri
+            + 'dnsDeleteRecord'
+            + self.api_options
+            + function_options
+        )
+        return response.json()
 
 
 if __name__ == '__main__':
