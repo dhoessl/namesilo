@@ -1,5 +1,5 @@
 ---
-- name: "NameSilo API'
+- name: "NameSilo API"
   namesilo_dns:
     apikey: '{{ role_namesilo_apikey }}'
     domain: '{{ item.domain }}'
