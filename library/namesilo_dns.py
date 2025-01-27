@@ -69,7 +69,9 @@ class namesilo:
         # Check if the host is in the existing entries
         # If thats the case just update its config
         for host in hosts:
-            if result["host"] != host["host"] or result["type"] != host["type"]:
+            if host["host"] != result["host"]:
+                continue
+            if host["type"] != result["type"]:
                 continue
             if self.module.params['state'] != "present":
                 self.change_settings(host, 'delete')
