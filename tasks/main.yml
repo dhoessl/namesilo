@@ -5,6 +5,7 @@
   ansible.builtin.pip:
     name: "git+https://github.com/dhoessl/namesilo-py"
     extra_args: "--break-system-packages"
+    state: "latest"
 
 - name: "Mange DNS Records"
   delegate_to: "localhost"
