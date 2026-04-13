@@ -3,6 +3,7 @@
 from ansible.module_utils.basic import AnsibleModule
 from api import NamesiloAPI, Domain, DomainRecordStateError
 
+
 def main():
     module_args = {
         "api_key": {
@@ -24,7 +25,7 @@ def main():
     result = {
         "changed": False,
         "original_domains": module.params["domains"],
-        "domains": None
+        "domains": []
     }
 
     api = NamesiloAPI(module.params["api_key"])
@@ -45,6 +46,7 @@ def main():
             "records": namesilo_domain.records
         })
     module.exit_json(**result)
+
 
 if __name__ == "__main__":
     main()
