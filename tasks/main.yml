@@ -1,6 +1,7 @@
 ---
 - name: "Install namesilo-py pip package"
   delegate_to: "localhost"
+  connection: "local"
   run_once: true
   ansible.builtin.pip:
     name: "git+https://github.com/dhoessl/namesilo-py"
@@ -9,6 +10,8 @@
 
 - name: "Mange DNS Records"
   delegate_to: "localhost"
+  connection: "local"
+  run_once: true
   namesilo_dns:
     api_key: "{{ namesilo_api_key }}"
     domains: "{{ namesilo_domains }}"
